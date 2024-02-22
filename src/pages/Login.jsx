@@ -16,7 +16,7 @@ function Login() {
 
       console.log(response);
 
-      navigate("/home");
+      navigate("/");
     } catch (err) {
       console.log(err);
     }

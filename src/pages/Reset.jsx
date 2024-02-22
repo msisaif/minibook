@@ -15,7 +15,7 @@ function Reset() {
 
     console.log(response);
 
-    navigate("/home");
+    navigate("/");
   }
 
   return (
