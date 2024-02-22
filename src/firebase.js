@@ -7,11 +7,13 @@ import { initializeApp } from "firebase/app";
 import {
   createUserWithEmailAndPassword,
   getAuth,
+  GoogleAuthProvider,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
+  signInWithPopup,
 } from "firebase/auth";
 
-console.log(createUserWithEmailAndPassword);
+const googleAuthProvider = new GoogleAuthProvider();
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -53,9 +55,16 @@ const sendPasswordReset = async (email) => {
   return response;
 };
 
+const signInWithGoogle = async () => {
+  const response = signInWithPopup(auth, googleAuthProvider);
+
+  return response;
+} 
+
 export {
   auth,
   loginWithEmailAndPassword,
   registerWithEmailAndPassword,
   sendPasswordReset,
+  signInWithGoogle,
 };

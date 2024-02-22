@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import CenterContainer from "../components/CenterContainer";
-import { loginWithEmailAndPassword } from "../firebase";
+import { loginWithEmailAndPassword, signInWithGoogle } from "../firebase";
 
 function Login() {
   const navigate = useNavigate();
@@ -13,6 +13,18 @@ function Login() {
 
     try {
       const response = await loginWithEmailAndPassword(email, password);
+
+      console.log(response);
+
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async function handleSocialLogin() {
+    try {
+      const response = await signInWithGoogle();
 
       console.log(response);
 
@@ -53,6 +65,18 @@ function Login() {
             Login
           </button>
         </form>
+        <hr className="mt-4" />
+        <div className="flex justify-start items-center mt-4 gap-2">
+          <p className="italic">Login with</p>
+          <button
+            type="button"
+            onClick={handleSocialLogin}
+            className="px-2 py-1 border rounded bg-green-700 text-white"
+          >
+            Google
+          </button>
+        </div>
+        <hr className="mt-4" />
         <p className="mt-4 text-center">
           No Account?{" "}
           <NavLink to="/register" className="text-blue-500 underline">
