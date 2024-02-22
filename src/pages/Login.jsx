@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import CenterContainer from "../components/CenterContainer";
-import { loginWithEmailAndPassword, signInWithGoogle } from "../firebase";
+import { loginWithEmailAndPassword, signInWithGitHub, signInWithGoogle } from "../firebase";
 
 function Login() {
   const navigate = useNavigate();
@@ -22,15 +22,31 @@ function Login() {
     }
   }
 
-  async function handleSocialLogin() {
-    try {
-      const response = await signInWithGoogle();
+  function getSignInProvider(provider) {
+    switch(provider) {
+      case 'google':
+        return signInWithGoogle;
 
-      console.log(response);
+      case 'github':
+        return signInWithGitHub;
 
-      navigate("/");
-    } catch (err) {
-      console.log(err);
+      default: null
+    }
+  }
+
+  async function handleSocialLogin(provider) {
+    const signInWithProvider = getSignInProvider(provider);
+
+    if(signInWithProvider) {
+      try {
+        const response = await signInWithProvider();
+  
+        console.log(response);
+  
+        navigate("/");
+      } catch (err) {
+        console.log(err);
+      }
     }
   }
 
@@ -70,10 +86,17 @@ function Login() {
           <p className="italic">Login with</p>
           <button
             type="button"
-            onClick={handleSocialLogin}
-            className="px-2 py-1 border rounded bg-green-700 text-white"
+            onClick={() => handleSocialLogin('google')}
+            className="px-2 py-1 border rounded bg-pink-500 text-white"
           >
             Google
+          </button>
+          <button
+            type="button"
+            onClick={() => handleSocialLogin('github')}
+            className="px-2 py-1 border rounded bg-black text-white"
+          >
+            GitHub
           </button>
         </div>
         <hr className="mt-4" />

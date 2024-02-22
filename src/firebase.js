@@ -8,12 +8,14 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   GoogleAuthProvider,
+  GithubAuthProvider,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
 } from "firebase/auth";
 
 const googleAuthProvider = new GoogleAuthProvider();
+const githubAuthProvider = new GithubAuthProvider();
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -61,10 +63,17 @@ const signInWithGoogle = async () => {
   return response;
 } 
 
+const signInWithGitHub = async () => {
+  const response = signInWithPopup(auth, githubAuthProvider);
+
+  return response;
+} 
+
 export {
   auth,
   loginWithEmailAndPassword,
   registerWithEmailAndPassword,
   sendPasswordReset,
   signInWithGoogle,
+  signInWithGitHub,
 };
