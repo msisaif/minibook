@@ -33,11 +33,13 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
-logEvent(analytics, 'notification_received');
+// logEvent(analytics, 'notification_received');
 
 const auth = getAuth(app);
 
 const registerWithEmailAndPassword = async (email, password) => {
+  logEvent(analytics, 'registerWithEmailAndPassword');
+  
   const res = await createUserWithEmailAndPassword(auth, email, password);
 
   const user = res.user;
@@ -46,24 +48,32 @@ const registerWithEmailAndPassword = async (email, password) => {
 };
 
 const loginWithEmailAndPassword = async (email, password) => {
+  logEvent(analytics, 'loginWithEmailAndPassword');
+
   const response = await signInWithEmailAndPassword(auth, email, password);
 
   return response;
 };
 
 const sendPasswordReset = async (email) => {
+  logEvent(analytics, 'sendPasswordReset');
+
   const response = await sendPasswordResetEmail(auth, email);
 
   return response;
 };
 
 const signInWithGoogle = async () => {
+  logEvent(analytics, 'signInWithGoogle');
+
   const response = signInWithPopup(auth, googleAuthProvider);
 
   return response;
 } 
 
 const signInWithGitHub = async () => {
+  logEvent(analytics, 'signInWithGitHub');
+
   const response = signInWithPopup(auth, githubAuthProvider);
 
   return response;
