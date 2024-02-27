@@ -20,13 +20,13 @@ const githubAuthProvider = new GithubAuthProvider();
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyAWsq9r1iIvGC8Noxsob6-aZ8svR7M7uIQ",
-  authDomain: "minibook-313.firebaseapp.com",
-  projectId: "minibook-313",
-  storageBucket: "minibook-313.appspot.com",
-  messagingSenderId: "75680827767",
-  appId: "1:75680827767:web:d9d0008238c4f254683972",
-  measurementId: "G-F7HCCGNMEW",
+  apiKey: import.meta.env.VITE_API_KEY,
+  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_APP_ID,
+  measurementId: import.meta.env.VITE_MEASUREMENT_ID,
 };
 
 // Initialize Firebase
